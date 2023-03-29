@@ -105,7 +105,7 @@ Retrieving Lua functions:
 	// can return multiple values
 ```
 
-##Using the .NET objects.##
+## Using .NET objects.
 
 Passing .NET objects to the state:
 
