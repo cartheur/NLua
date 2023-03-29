@@ -1,0 +1,36 @@
+#
+# NLua Travis-CI Hook
+#
+
+language: csharp
+
+dotnet: 7.0
+
+before_install:
+  - export PATH=/opt/mono/bin:$PATH
+
+install:
+  - sudo apt-get install mono-devel nunit nuget
+
+script:
+  - nuget restore NLua.sln
+  - msbuild /p:Configuration=Release /t:Restore NLua.sln
+  - msbuild /p:Configuration=Release NLua.sln
+  - dotnet test ./tests/build/net46/bin/Release/NLuaTest.dll
+
+# Execute additional tests or commands
+#after_script:
+#  - [run additional test commans]
+
+# Only watch the main branch
+branches:
+  only:
+    - main
+
+# Notify if needed
+notifications:
+  recipients:
+    - cartheur@pm.me
+  email:
+    on_success: change
+    on_failure: always
